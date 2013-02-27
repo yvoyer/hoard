@@ -1,0 +1,10 @@
+{
+    "name": "yvoyer/hoard",
+    "description": "The StarHoard librairy",
+    "autoload": {
+        "psr-0": { "Star": ["lib", "tests"] }
+    },
+    "require": {
+        "php": ">=5.3.3"
+    }
+}
