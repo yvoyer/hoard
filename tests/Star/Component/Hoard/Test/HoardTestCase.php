@@ -11,6 +11,22 @@ class HoardTestCase extends \PHPUnit_Framework_TestCase
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject
      */
+    protected function getMockEquipment()
+    {
+        return $this->getMock("Star\Component\Hoard\Equipment\EquipmentInterface");
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected function getMockEquipmentFactory()
+    {
+        return $this->getMock("Star\Component\Hoard\Equipment\Factory\EquipmentFactoryInterface");
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
     protected function getMockItem()
     {
         return $this->getMock("Star\Component\Hoard\Model\ItemInterface");
