@@ -4,10 +4,10 @@
  * @package Calendar Component
  */
 
-$baseDir = __DIR__ . '/../';
+// $baseDir = __DIR__ . '/../';
 
-/**
- * @var $loader \Composer\Autoload\ClassLoader
- */
-$loader = include $baseDir . '/vendor/autoload.php';
-$loader->register();
+// /**
+//  * @var $loader \Composer\Autoload\ClassLoader
+//  */
+// $loader = include $baseDir . '/vendor/autoload.php';
+// $loader->register();

@@ -4,9 +4,9 @@
  * @package Calendar Component
  */
 
-namespace Star\Component\Hoard\Test\Collection;
+namespace Star\Component\Hoard\Tests\Collection;
 
-use Star\Component\Hoard\Test\HoardTestCase;
+use Star\Component\Hoard\Tests\HoardTestCase;
 
 class AbstractContainerTest extends HoardTestCase
 {

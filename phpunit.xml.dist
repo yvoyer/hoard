@@ -11,12 +11,12 @@
     stopOnFailure               = "false"
     syntaxCheck                 = "false" 
     strict                      = "true" 
-    bootstrap                   = "./tests/autoload.php" >
+    bootstrap                   = "./app/autoload.php" >
    
     <!-- Enable the coverage -->
-   <logging> 
+    <!-- <logging> 
          <log type="coverage-html" target="/tmp/coverage/hoard.local" charset="UTF-8"/> 
-    </logging> 
+    </logging> -->
 
     <testsuites>
         <testsuite name="Hoard">
@@ -26,8 +26,10 @@
 
     <filter>
         <whitelist>
+            <directory>./src/</directory>
             <directory>./lib/</directory>
             <exclude>
+	            <directory>./src/*/*/Tests/</directory>
                 <directory>./tests</directory>
             </exclude>
         </whitelist>

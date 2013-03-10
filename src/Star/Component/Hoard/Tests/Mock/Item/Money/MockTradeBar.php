@@ -4,7 +4,7 @@
  * @package Calendar Component
  */
 
-namespace Star\Component\Hoard\Test\Mock\Item\Money;
+namespace Star\Component\Hoard\Tests\Mock\Item\Money;
 
 use Star\Component\Hoard\Model\Item;
 

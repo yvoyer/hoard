@@ -4,7 +4,7 @@
  * @package Hoard Component
  */
 
-namespace Star\Component\Hoard\Test;
+namespace Star\Component\Hoard\Tests;
 
 class HoardTestCase extends \PHPUnit_Framework_TestCase
 {
@@ -30,6 +30,14 @@ class HoardTestCase extends \PHPUnit_Framework_TestCase
     protected function getMockItem()
     {
         return $this->getMock("Star\Component\Hoard\Model\ItemInterface");
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|\Star\Component\Hoard\Marker\MarkerInterface
+     */
+    protected function getMockMarker()
+    {
+        return $this->getMock("Star\Component\Hoard\Marker\MarkerInterface");
     }
 
     /**

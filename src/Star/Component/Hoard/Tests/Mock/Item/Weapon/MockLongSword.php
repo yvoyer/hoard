@@ -4,7 +4,7 @@
  * @package Hoard Component
  */
 
-namespace Star\Component\Hoard\Test\Mock\Item\Weapon;
+namespace Star\Component\Hoard\Tests\Mock\Item\Weapon;
 
 use Star\Component\Hoard\Model\Item;
 

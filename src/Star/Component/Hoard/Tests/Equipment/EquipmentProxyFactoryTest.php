@@ -4,10 +4,10 @@
  * @package Calendar Component
  */
 
-namespace Star\Component\Hoard\Test\Equipment;
+namespace Star\Component\Hoard\Tests\Equipment;
 
 use Star\Component\Hoard\Equipment\EquipmentProxyFactory;
-use Star\Component\Hoard\Test\HoardTestCase;
+use Star\Component\Hoard\Tests\HoardTestCase;
 
 /**
  * @author Yannick Voyer

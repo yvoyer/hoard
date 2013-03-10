@@ -4,13 +4,13 @@
  * @package Calendar Component
  */
 
-namespace Star\Component\Hoard\Test\Mock\Item\Money;
+namespace Star\Component\Hoard\Tests\Mock\Item\Money;
 
 use Star\Component\Hoard\Model\Item;
 
-class MockGoldPiece extends Item
+class MockSilverPiece extends Item
 {
-    protected $name = "Gold Piece";
-    protected $value = 1;
+    protected $name = "Silver Piece";
+    protected $value = .1;
     protected $isMagic = false;
 }

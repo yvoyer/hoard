@@ -11,10 +11,12 @@
     processIsolation            = "false"
     stopOnFailure               = "false"
     syntaxCheck                 = "false"
+    strict                      = "true"
     bootstrap                   = "bootstrap.php.cache" >
 
     <testsuites>
-        <testsuite name="Project Test Suite">
+        <testsuite name="Hoard Test Suite">
+            <directory>../src/*/*/*/Tests</directory>
             <directory>../src/*/*Bundle/Tests</directory>
             <directory>../src/*/Bundle/*Bundle/Tests</directory>
         </testsuite>
@@ -30,6 +32,7 @@
         <whitelist>
             <directory>../src</directory>
             <exclude>
+                <directory>../src/*/*/*/Tests</directory>
                 <directory>../src/*/*Bundle/Resources</directory>
                 <directory>../src/*/*Bundle/Tests</directory>
                 <directory>../src/*/Bundle/*Bundle/Resources</directory>
@@ -37,5 +40,9 @@
             </exclude>
         </whitelist>
     </filter>
-
+    
+    <!-- Enable the coverage -->
+    <!-- <logging> 
+         <log type="coverage-html" target="/tmp/coverage/hoard.local" charset="UTF-8"/> 
+    </logging> -->
 </phpunit>
