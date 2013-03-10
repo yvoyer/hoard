@@ -3,6 +3,7 @@
 namespace Star\HoardBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Star\Component\Hoard\Equipment\Item;
 
 /**
@@ -30,6 +31,12 @@ class Equipment extends Item
      * @ORM\Column(name="name", type="string", length=255)
      */
     protected $name;
+
+    /**
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(length=255, unique=true)
+     */
+    private $slug;
 
     /**
      * @var float
@@ -76,5 +83,29 @@ class Equipment extends Item
     public function getAbilities()
     {
         return $this->abilities;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     *
+     * @return Equipment
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

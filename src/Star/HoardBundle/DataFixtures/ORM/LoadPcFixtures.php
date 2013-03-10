@@ -18,7 +18,7 @@ class LoadPcFixtures extends AbstractFixture
     public function load(ObjectManager $manager)
     {
         $pc = new PlayingCharacter();
-        $pc->setName('Layla');
+        $pc->setName('Character 1');
 
         $manager->persist($pc);
         $manager->flush();
