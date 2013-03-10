@@ -8,19 +8,20 @@ namespace Star\HoardBundle\DataFixtures\ORM;
 
 use Star\HoardBundle\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use Star\HoardBundle\Entity\PlayingCharacter;
+use Star\HoardBundle\Entity\Equipment;
 
-class LoadPcFixtures extends AbstractFixture
+class LoadEquipmentFixtures extends AbstractFixture
 {
     /**
      * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {
-        $pc = new PlayingCharacter();
-        $pc->setName('Layla');
+        $item = new Equipment();
+        $item->setName('Short Sword');
+        $item->setValue(15);
 
-        $manager->persist($pc);
+        $manager->persist($item);
         $manager->flush();
     }
 }

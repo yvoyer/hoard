@@ -4,7 +4,11 @@
  * @package Hoard Component
  */
 
-namespace Star\Component\Hoard\Model;
+namespace Star\Component\Hoard\Equipment;
+
+use Star\Component\Hoard\Exception\Integrity\EquipmentIntegrityException;
+use Star\Component\Hoard\Configuration\ObjectConfigurationInterface;
+use Star\Component\Hoard\Equipment\Configuration\ItemConfigurationInterface;
 
 /**
  * An item object
@@ -34,11 +38,22 @@ class Item implements ItemInterface
      */
     protected $isMagic;
 
+    public function __construct(ItemConfigurationInterface $configuration = null)
+    {
+        if (null !== $configuration) {
+            $this->loadFromConfiguration($configuration);
+        }
+    }
+
     /**
      * @see \Star\Component\Hoard\Model\ItemInterface::getName()
      */
     public function getName()
     {
+        if (null === $this->name) {
+            throw EquipmentIntegrityException::getNameNotNullableException();
+        }
+
         return $this->name;
     }
 
@@ -47,6 +62,10 @@ class Item implements ItemInterface
      */
     public function setName($name)
     {
+        if (null === $name) {
+            throw EquipmentIntegrityException::getNameNotNullableException();
+        }
+
         $this->name = $name;
     }
 
@@ -55,6 +74,10 @@ class Item implements ItemInterface
      */
     public function getValue()
     {
+        if (null === $this->value) {
+            throw EquipmentIntegrityException::getValueNotNullableException();
+        }
+
         return $this->value;
     }
 
@@ -63,6 +86,10 @@ class Item implements ItemInterface
      */
     public function setValue($value)
     {
+        if (null === $value) {
+            throw EquipmentIntegrityException::getValueNotNullableException();
+        }
+
         $this->value = $value;
     }
 
@@ -80,5 +107,16 @@ class Item implements ItemInterface
     public function setIsMagic($isMagic)
     {
         $this->isMagic = $isMagic;
+    }
+
+    private function loadFromConfiguration(ObjectConfigurationInterface $configuration)
+    {
+        $array = $configuration->toArray();var_dump($array);
+        foreach ($array as $key => $value) {
+            $setter = "set" . ucfirst($key);
+            if (method_exists($this, $setter)) {
+                $this->{$setter}($value);
+            }
+        }
     }
 }

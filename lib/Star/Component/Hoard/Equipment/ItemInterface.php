@@ -4,7 +4,7 @@
  * @package Hoard Component
  */
 
-namespace Star\Component\Hoard\Model;
+namespace Star\Component\Hoard\Equipment;
 
 /**
  * An item object

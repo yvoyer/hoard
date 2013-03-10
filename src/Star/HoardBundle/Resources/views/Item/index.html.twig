@@ -1,0 +1,18 @@
+<h1>Items</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for item in items %}
+    <tr>
+        <td>{{ item.name }}</td>
+        <td>{{ item.value }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
