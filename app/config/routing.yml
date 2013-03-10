@@ -1,0 +1,5 @@
+star_hoard:
+    resource: "@StarHoardBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
