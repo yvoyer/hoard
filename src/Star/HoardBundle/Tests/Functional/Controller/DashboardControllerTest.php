@@ -2,13 +2,15 @@
 
 namespace Star\HoardBundle\Tests\Functional\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Star\HoardBundle\Tests\Functional\FunctionalTestCase;
 
-class DashboardControllerTest extends WebTestCase
+class DashboardControllerTest extends FunctionalTestCase
 {
-    public function testIndex()
+    public function testPlayerCanSeeTheCharacterList()
     {
-        $client = static::createClient();
-        $crawler = $client->request('GET', '/');
+        $url     = $this->generateUrl("hoard.dashboard");
+        $crawler = $this->request($url);
+
+        $this->assertContains("Character 1", $crawler->filter("body")->text());
     }
 }

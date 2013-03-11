@@ -4,6 +4,10 @@
 <h1>Dashboard</h1>
 
 <ul>
+  <li><a href="{{ path("hoard.item_index") }}">Items</a></li>
+</ul>
+
+<ul>
 {% for character in characters %}
   <li>{{ character.name }}</li>
 {% endfor %}

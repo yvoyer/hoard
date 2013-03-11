@@ -38,11 +38,19 @@ class Item implements ItemInterface
      */
     protected $isMagic;
 
+    /**
+     * The special abilities of the item
+     *
+     * @var array
+     */
+    protected $abilities;
+
     public function __construct(ItemConfigurationInterface $configuration = null)
     {
         if (null !== $configuration) {
             $this->loadFromConfiguration($configuration);
         }
+        $this->abilities = array();
     }
 
     /**
@@ -50,9 +58,9 @@ class Item implements ItemInterface
      */
     public function getName()
     {
-        if (null === $this->name) {
-            throw EquipmentIntegrityException::getNameNotNullableException();
-        }
+//         if (null === $this->name) {
+//             throw EquipmentIntegrityException::getNameNotNullableException();
+//         }
 
         return $this->name;
     }
@@ -74,9 +82,9 @@ class Item implements ItemInterface
      */
     public function getValue()
     {
-        if (null === $this->value) {
-            throw EquipmentIntegrityException::getValueNotNullableException();
-        }
+//         if (null === $this->value) {
+//             throw EquipmentIntegrityException::getValueNotNullableException();
+//         }
 
         return $this->value;
     }
@@ -109,9 +117,32 @@ class Item implements ItemInterface
         $this->isMagic = $isMagic;
     }
 
+    /**
+     * Set abilities
+     *
+     * @param array $abilities
+     * @return Equipment
+     */
+    public function setAbilities($abilities)
+    {
+        $this->abilities = $abilities;
+
+        return $this;
+    }
+
+    /**
+     * Get abilities
+     *
+     * @return array
+     */
+    public function getAbilities()
+    {
+        return $this->abilities;
+    }
+
     private function loadFromConfiguration(ObjectConfigurationInterface $configuration)
     {
-        $array = $configuration->toArray();var_dump($array);
+        $array = $configuration->toArray();
         foreach ($array as $key => $value) {
             $setter = "set" . ucfirst($key);
             if (method_exists($this, $setter)) {

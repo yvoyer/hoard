@@ -63,29 +63,6 @@ class Equipment extends Item
     }
 
     /**
-     * Set abilities
-     *
-     * @param array $abilities
-     * @return Equipment
-     */
-    public function setAbilities($abilities)
-    {
-        $this->abilities = $abilities;
-
-        return $this;
-    }
-
-    /**
-     * Get abilities
-     *
-     * @return array
-     */
-    public function getAbilities()
-    {
-        return $this->abilities;
-    }
-
-    /**
      * Set slug
      *
      * @param string $slug
