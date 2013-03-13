@@ -6,6 +6,8 @@
 
 namespace Star\Component\Hoard\Equipment;
 
+use Star\Component\Hoard\Equipment\Ability\AbilityInterface;
+
 use Star\Component\Hoard\Exception\Integrity\EquipmentIntegrityException;
 use Star\Component\Hoard\Configuration\ObjectConfigurationInterface;
 use Star\Component\Hoard\Equipment\Configuration\ItemConfigurationInterface;
@@ -45,11 +47,8 @@ class Item implements ItemInterface
      */
     protected $abilities;
 
-    public function __construct(ItemConfigurationInterface $configuration = null)
+    public function __construct()
     {
-        if (null !== $configuration) {
-            $this->loadFromConfiguration($configuration);
-        }
         $this->abilities = array();
     }
 
@@ -58,10 +57,6 @@ class Item implements ItemInterface
      */
     public function getName()
     {
-//         if (null === $this->name) {
-//             throw EquipmentIntegrityException::getNameNotNullableException();
-//         }
-
         return $this->name;
     }
 
@@ -82,11 +77,12 @@ class Item implements ItemInterface
      */
     public function getValue()
     {
-//         if (null === $this->value) {
-//             throw EquipmentIntegrityException::getValueNotNullableException();
-//         }
+        $value = $this->value;
+        foreach ($this->abilities as $ability) {
+            $value += $ability->getValue();
+        }
 
-        return $this->value;
+        return $value;
     }
 
     /**
@@ -123,9 +119,9 @@ class Item implements ItemInterface
      * @param array $abilities
      * @return Equipment
      */
-    public function setAbilities($abilities)
+    public function addAbility(AbilityInterface $ability)
     {
-        $this->abilities = $abilities;
+        $this->abilities[] = $ability;
 
         return $this;
     }
@@ -138,16 +134,5 @@ class Item implements ItemInterface
     public function getAbilities()
     {
         return $this->abilities;
-    }
-
-    private function loadFromConfiguration(ObjectConfigurationInterface $configuration)
-    {
-        $array = $configuration->toArray();
-        foreach ($array as $key => $value) {
-            $setter = "set" . ucfirst($key);
-            if (method_exists($this, $setter)) {
-                $this->{$setter}($value);
-            }
-        }
     }
 }

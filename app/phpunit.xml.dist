@@ -15,10 +15,18 @@
     bootstrap                   = "bootstrap.php.cache" >
 
     <testsuites>
-        <testsuite name="Hoard Test Suite">
+        <testsuite name="unit">
             <directory>../src/*/*/*/Tests</directory>
             <directory>../src/*/*Bundle/Tests</directory>
             <directory>../src/*/Bundle/*Bundle/Tests</directory>
+        </testsuite>
+        <testsuite name="functional">
+            <directory>../src/*/*/*/Tests/Functional</directory>
+            <directory>../src/*/*/Tests/Functional</directory>
+        </testsuite>
+        <testsuite name="behavior">
+            <directory>../src/*/*/*/Tests/Behavior</directory>
+            <directory>../src/*/*/Tests/Behavior</directory>
         </testsuite>
     </testsuites>
 
