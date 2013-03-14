@@ -33,6 +33,9 @@ class MagicWeaponAbility extends MasterworkWeaponAbility
      */
     public function getValue()
     {
-        return $this->enhancement->getValue() + parent::getValue();
+        $value = parent::getValue();
+        $value += $this->enhancement->getValue();
+
+        return $value;
     }
 }
