@@ -1,22 +1,22 @@
 <?php
 /**
  * @author  Yannick Voyer (http://github.com/yvoyer)
- * @package Calendar Component
+ * @package Hoard Component
  */
 
 namespace Star\Component\Hoard\Collection;
 
-abstract class AbstractContainer implements ObjectCollection
+class Collection implements ObjectCollection
 {
     /**
-    * An array containing the entries of this collection.
+    * An array containing the elements
     *
     * @var array
     */
     private $_elements;
 
     /**
-    * Initializes a new ArrayCollection.
+    * Initializes a new Collection.
     *
     * @param array $elements
     */
@@ -91,7 +91,3 @@ abstract class AbstractContainer implements ObjectCollection
         $this->_elements = array();
     }
 }
-
-
-
-

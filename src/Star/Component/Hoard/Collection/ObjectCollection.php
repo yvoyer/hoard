@@ -1,14 +1,17 @@
 <?php
 /**
  * @author  Yannick Voyer (http://github.com/yvoyer)
- * @package Calendar Component
+ * @package Hoard Component
  */
 
 namespace Star\Component\Hoard\Collection;
 
-use Closure, Countable, IteratorAggregate, ArrayAccess;
+use Closure;
+use Countable;
+use IteratorAggregate;
+use ArrayAccess;
 
-interface ObjectCollection extends /*Closure,*/ Countable/*, IteratorAggregate/*, ArrayAccess*/
+interface ObjectCollection extends Countable/*, IteratorAggregate/*, ArrayAccess*/
 {
 
 }
