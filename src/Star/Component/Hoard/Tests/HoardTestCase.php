@@ -21,7 +21,7 @@ class HoardTestCase extends \PHPUnit_Framework_TestCase
      */
     protected function getMockBonus()
     {
-        return $this->getMock("Star\Component\Hoard\Equipment\Bonus\BonusInterface");
+        return $this->getMock("Star\Component\Hoard\Bonus\BonusInterface");
     }
 
     /**
@@ -29,7 +29,7 @@ class HoardTestCase extends \PHPUnit_Framework_TestCase
      */
     protected function getMockEnhancementBonus()
     {
-        return $this->getMock("Star\Component\Hoard\Equipment\Bonus\EnhancementBonus");
+        return $this->getMock("Star\Component\Hoard\Bonus\EnhancementBonus");
     }
 
     /**
@@ -46,6 +46,14 @@ class HoardTestCase extends \PHPUnit_Framework_TestCase
     protected function getMockEquipmentFactory()
     {
         return $this->getMock("Star\Component\Hoard\Equipment\Factory\EquipmentFactoryInterface");
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected function getMockEquipmentType()
+    {
+        return $this->getMock("Star\Component\Hoard\Equipment\Type\TypeInterface");
     }
 
     /**
