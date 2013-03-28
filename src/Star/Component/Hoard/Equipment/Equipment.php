@@ -36,7 +36,7 @@ class Equipment
      */
     protected $types;
 
-    public function __construct($name, $baseCost)
+    public function __construct($name = null, $baseCost = 0)
     {
         $this->name     = $name;
         $this->baseCost = $baseCost;
@@ -61,7 +61,6 @@ class Equipment
     public function getCost()
     {
         $cost = $this->baseCost;
-
         foreach ($this->types as $type) {
             $cost += $type->getCost();
         }
@@ -99,5 +98,15 @@ class Equipment
         $this->types[] = $type;
 
         return $this;
+    }
+
+    /**
+     * Returns the base value
+     *
+     * @return number
+     */
+    public function getBaseCost()
+    {
+        return $this->baseCost;
     }
 }

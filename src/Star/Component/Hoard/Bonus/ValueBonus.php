@@ -4,7 +4,7 @@
  * @package Hoard Component
  */
 
-namespace Star\Component\Hoard\Equipment\Bonus;
+namespace Star\Component\Hoard\Bonus;
 
 interface ValueBonus
 {

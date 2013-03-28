@@ -4,7 +4,7 @@
  * @package Hoard Component
  */
 
-namespace Star\Component\Hoard\Equipment\Bonus;
+namespace Star\Component\Hoard\Bonus;
 
 /**
  * @author Yannick Voyer
@@ -21,9 +21,9 @@ interface BonusInterface
     public function __toString();
 
     /**
-     * Returns the value for the bonus
+     * Returns the value for the plus
      *
      * @return string
      */
-    public function getValue();
+    public function getPlus();
 }

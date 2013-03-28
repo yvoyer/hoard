@@ -35,12 +35,28 @@ class WeaponTest extends HoardTestCase
     public function testManageBonus()
     {
         $weapon = $this->getWeapon();
-        $bonus  = $this->getMockBonus();
+        $bonus  = $this->getMockEnhancementBonus();
 
         $this->assertCount(0, $weapon->getBonuses());
         $this->assertSame($weapon, $weapon->addBonus($bonus));
         $this->assertCount(1, $weapon->getBonuses());
         $this->assertSame($weapon, $weapon->removeBonus($bonus));
         $this->assertCount(0, $weapon->getBonuses());
+    }
+
+    public function testGetAttackDamageBonus()
+    {
+        $this->markTestIncomplete("");
+        $plus  = 3;
+        $bonus = $this->getMockEnhancementBonus();
+        $bonus->expects($this->once())
+            ->method("getValue")
+            ->will($this->returnValue($plus));
+
+        $weapon = $this->getWeapon();
+        $weapon->addBonus($bonus);
+
+        $this->assertSame($plus, $weapon->getAttackBonus());
+        $this->assertSame($plus, $weapon->getDamageBonus());
     }
 }

@@ -112,7 +112,7 @@ class ItemCreationBehaviorTest extends BehaviorTestCase
         switch ($action) {
             case self::WHEN_ADD_MAGIC_BONUS:
                 $weaponBonus = new WeaponBonus($arguments[0], $arguments[1]);
-                $world["item"]->addAbility(new MagicWeaponAbility($weaponBonus));
+                $world["item"]->addAbility(new EnhanMagicWeaponAbility($weaponBonus));
                 break;
 
             case self::WHEN_ADD_MASTERWORK:

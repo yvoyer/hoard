@@ -4,7 +4,7 @@ namespace Star\HoardBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Star\Component\Hoard\Equipment\Item;
+use Star\Component\Hoard\Equipment\Equipment as BaseEquipment;
 
 /**
  * Equipment
@@ -12,7 +12,7 @@ use Star\Component\Hoard\Equipment\Item;
  * @ORM\Table(name="hoard_equipment")
  * @ORM\Entity
  */
-class Equipment extends Item
+class Equipment extends BaseEquipment
 {
     const SHORT_NAME = "StarHoardBundle:Equipment";
 
@@ -36,21 +36,21 @@ class Equipment extends Item
      * @Gedmo\Slug(fields={"name"})
      * @ORM\Column(length=255, unique=true)
      */
-    private $slug;
+    protected $slug;
 
     /**
      * @var float
      *
      * @ORM\Column(name="value", type="float")
      */
-    protected $value;
+    protected $baseCost;
 
     /**
      * @var array
      *
      * @ORM\Column(name="abilities", type="array")
      */
-    protected $abilities;
+    protected $types;
 
     /**
      * Get id
@@ -84,5 +84,29 @@ class Equipment extends Item
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Set the name
+     *
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Set the baseCost
+     *
+     * @param numeric $baseCost
+     */
+    public function setBaseCost($baseCost)
+    {
+        $this->baseCost = $baseCost;
+
+        return $this;
     }
 }

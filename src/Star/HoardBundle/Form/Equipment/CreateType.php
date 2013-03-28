@@ -12,7 +12,7 @@ class CreateType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('value')
+            ->add('baseCost')
         ;
     }
 

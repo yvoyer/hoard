@@ -26,7 +26,7 @@ class EquipmentProxyFactoryTest extends HoardTestCase
         $this->factory = new EquipmentProxyFactory();
     }
 
-    public function testCreatesTheSupportedRequestedEquipment()
+    public function testCreateEquipment()
     {
         $marker           = ":EQUIPMENT";
         $equipment        = $this->getMockEquipment();

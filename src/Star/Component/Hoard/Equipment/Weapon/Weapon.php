@@ -6,7 +6,7 @@
 
 namespace Star\Component\Hoard\Equipment\Weapon;
 
-use Star\Component\Hoard\Equipment\Bonus\BonusInterface;
+use Star\Component\Hoard\Bonus\Enhancement\EnhancementBonus;
 use Star\Component\Hoard\Equipment\Ability\AbilityInterface;
 
 class Weapon
@@ -71,11 +71,11 @@ class Weapon
     /**
      * Add a bonus
      *
-     * @param BonusInterface $bonus
+     * @param EnhancementBonus $bonus
      *
      * @return \Star\Component\Hoard\Equipment\Weapon\Weapon
      */
-    public function addBonus(BonusInterface $bonus)
+    public function addBonus(EnhancementBonus $bonus)
     {
         $this->bonuses[] = $bonus;
 
@@ -95,11 +95,11 @@ class Weapon
     /**
      * Remove a bonus
      *
-     * @param BonusInterface $bonus
+     * @param EnhancementBonus $bonus
      *
      * @return \Star\Component\Hoard\Equipment\Weapon\Weapon
      */
-    public function removeBonus(BonusInterface $bonus)
+    public function removeBonus(EnhancementBonus $bonus)
     {
         $index = array_search($bonus, $this->bonuses, true);
         if (false !== $index) {

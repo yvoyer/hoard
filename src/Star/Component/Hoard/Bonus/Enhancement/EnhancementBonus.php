@@ -4,18 +4,18 @@
  * @package Hoard Component
  */
 
-namespace Star\Component\Hoard\Equipment\Bonus\Enhancement;
+namespace Star\Component\Hoard\Bonus\Enhancement;
 
-use Star\Component\Hoard\Equipment\Bonus\BonusInterface;
+use Star\Component\Hoard\Bonus\BonusInterface;
 
 class EnhancementBonus implements BonusInterface
 {
     /**
-     * The value of the bonus
+     * The plus of the bonus
      *
      * @var integer
      */
-    private $value;
+    private $plus;
 
     public function __construct($value)
     {
@@ -23,9 +23,9 @@ class EnhancementBonus implements BonusInterface
     }
 
     /**
-     * @see \Star\Component\Hoard\Equipment\Bonus\BonusInterface::getValue()
+     * @see \Star\Component\Hoard\Equipment\Bonus\BonusInterface::getPlus()
      */
-    public function getValue()
+    public function getPlus()
     {
         return $this->value;
     }

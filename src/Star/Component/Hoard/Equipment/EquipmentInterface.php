@@ -6,7 +6,11 @@
 
 namespace Star\Component\Hoard\Equipment;
 
+/**
+ * @author Yannick Voyer
+ *
+ * The public contract
+ */
 interface EquipmentInterface
 {
-
 }

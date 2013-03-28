@@ -6,15 +6,13 @@
 
 namespace Star\HoardBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
-
-use Star\HoardBundle\Form\Equipment\CreateType;
-
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Star\HoardBundle\Entity\Equipment;
+use Star\HoardBundle\Form\Equipment\CreateType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @author Yannick Voyer
@@ -29,11 +27,12 @@ class ItemController extends Controller
      */
     public function indexAction()
     {
-        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager  = $this->getDoctrine()->getManager();
         $itemRepository = $entityManager->getRepository(Equipment::SHORT_NAME);
+        $items          = $itemRepository->findAll();
 
         return array(
-            "items" => $itemRepository->findAll(),
+            "items" => $items,
         );
     }
 

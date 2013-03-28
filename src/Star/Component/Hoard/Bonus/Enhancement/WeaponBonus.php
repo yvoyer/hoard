@@ -4,18 +4,18 @@
  * @package Hoard Component
  */
 
-namespace Star\Component\Hoard\Equipment\Bonus\Enhancement;
+namespace Star\Component\Hoard\Bonus\Enhancement;
 
-use Star\Component\Hoard\Equipment\Bonus\EnhancementBonus;
-use Star\Component\Hoard\Equipment\Bonus\ValueBonus;
+use Star\Component\Hoard\Bonus\EnhancementBonus;
+use Star\Component\Hoard\Bonus\ValueBonus;
 
 class WeaponBonus extends EnhancementBonus implements ValueBonus
 {
     private $value;
 
-    public function __construct($bonus, $value)
+    public function __construct($plus, $value)
     {
-        parent::__construct($bonus);
+        parent::__construct($plus);
 
         $this->value = $value;
     }
