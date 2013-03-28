@@ -15,10 +15,9 @@
     bootstrap                   = "bootstrap.php.cache" >
 
     <testsuites>
-        <testsuite name="unit">
-            <directory>../src/*/*/*/Tests</directory>
-            <directory>../src/*/*Bundle/Tests</directory>
-            <directory>../src/*/Bundle/*Bundle/Tests</directory>
+        <testsuite name="functional">
+            <directory>../src/*/*/*/Tests/Functional</directory>
+            <directory>../src/*/*/Tests/Functional</directory>
         </testsuite>
     </testsuites>
 
@@ -42,7 +41,7 @@
     </filter>
     
     <!-- Enable the coverage -->
-    <!-- <logging> 
-         <log type="coverage-html" target="/tmp/coverage/hoard.local" charset="UTF-8"/> 
-    </logging> -->
+    <!--<logging> 
+        <log type="coverage-html" target="/tmp/coverage/hoard.local" charset="UTF-8"/> 
+    </logging>-->
 </phpunit>
