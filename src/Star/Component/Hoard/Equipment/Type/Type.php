@@ -10,8 +10,18 @@ abstract class Type
 {
     private $types = array();
 
-    public abstract function getValue();
+    /**
+     * Returns the cost
+     *
+     * @return float
+     */
+    public abstract function getCost();
 
+    /**
+     * Returns the cost of the equipment
+     *
+     * @return float
+     */
     protected function addType($type)
     {
         $this->types[] = $type;
@@ -20,5 +30,15 @@ abstract class Type
     public function __toString()
     {
         return implode(",", $this->types);
+    }
+
+    /**
+     * Returns whether the type is considered magic
+     *
+     * @return boolean
+    */
+    public function isMagic()
+    {
+
     }
 }

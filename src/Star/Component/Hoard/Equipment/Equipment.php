@@ -6,7 +6,7 @@
 
 namespace Star\Component\Hoard\Equipment;
 
-use Star\Component\Hoard\Equipment\Type\TypeInterface;
+use Star\Component\Hoard\Equipment\Type\Type;
 
 /**
  * An equipment object
@@ -93,7 +93,7 @@ class Equipment
      *
      * @return Equipment
      */
-    public function addType(TypeInterface $type)
+    public function addType(Type $type)
     {
         $this->types[] = $type;
 

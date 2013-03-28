@@ -30,7 +30,7 @@ class EquipmentTest extends HoardTestCase
     public function testGetBaseCost()
     {
         $equipment = $this->getEquipment();
-        $this->assertSame(self::BASE_COST, $equipment->getCost());
+        $this->assertSame(self::BASE_COST, $equipment->getBaseCost());
     }
 
     public function testAddTypeValueToCost()

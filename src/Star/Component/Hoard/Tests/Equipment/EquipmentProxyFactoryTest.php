@@ -50,7 +50,7 @@ class EquipmentProxyFactoryTest extends HoardTestCase
         $this->factory->registerType($equipmentFactory);
 
         $this->assertInstanceOf(
-            "Star\Component\Hoard\Equipment\EquipmentInterface",
+            "Star\Component\Hoard\Equipment\Equipment",
             $this->factory->createEquipment($marker)
         );
     }

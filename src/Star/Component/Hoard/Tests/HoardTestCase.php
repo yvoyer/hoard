@@ -37,7 +37,7 @@ class HoardTestCase extends \PHPUnit_Framework_TestCase
      */
     protected function getMockEquipment()
     {
-        return $this->getMock("Star\Component\Hoard\Equipment\EquipmentInterface");
+        return $this->getMock("Star\Component\Hoard\Equipment\Equipment");
     }
 
     /**
@@ -53,31 +53,31 @@ class HoardTestCase extends \PHPUnit_Framework_TestCase
      */
     protected function getMockEquipmentType()
     {
-        return $this->getMock("Star\Component\Hoard\Equipment\Type\TypeInterface");
+        return $this->getMock("Star\Component\Hoard\Equipment\Type\Type");
     }
 
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject
      */
-    protected function getMockItem()
-    {
-        return $this->getMock("Star\Component\Hoard\Model\ItemInterface");
-    }
+//     protected function getMockItem()
+//     {
+//         return $this->getMock("Star\Component\Hoard\Model\ItemInterface");
+//     }
 
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject|\Star\Component\Hoard\Marker\MarkerInterface
      */
-    protected function getMockMarker()
-    {
-        return $this->getMock("Star\Component\Hoard\Marker\MarkerInterface");
-    }
+//     protected function getMockMarker()
+//     {
+//         return $this->getMock("Star\Component\Hoard\Marker\MarkerInterface");
+//     }
 
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject
      */
     protected function getMockTemplate()
     {
-        return $this->getMock("Star\Component\Hoard\Model\TemplateInterface");
+        return $this->getMock("Star\Component\Hoard\Model\Template");
     }
 
     /**
@@ -85,7 +85,7 @@ class HoardTestCase extends \PHPUnit_Framework_TestCase
      */
     protected function getMockPlayer()
     {
-        return $this->getMock("Star\Component\Hoard\Model\PlayerInterface");
+        return $this->getMock("Star\Component\Hoard\Model\Player");
     }
 
     /**
@@ -93,7 +93,7 @@ class HoardTestCase extends \PHPUnit_Framework_TestCase
      */
     protected function getMockInventory()
     {
-        return $this->getMock("Star\Component\Hoard\Model\InventoryInterface");
+        return $this->getMock("Star\Component\Hoard\Model\Inventory");
     }
 
     /**
@@ -101,7 +101,7 @@ class HoardTestCase extends \PHPUnit_Framework_TestCase
      */
     protected function getMockGroup()
     {
-        return $this->getMock("Star\Component\Hoard\Model\GroupInterface");
+        return $this->getMock("Star\Component\Hoard\Model\Group");
     }
 
     /**
@@ -109,6 +109,6 @@ class HoardTestCase extends \PHPUnit_Framework_TestCase
      */
     protected function getMockCharacter()
     {
-        return $this->getMock("Star\Component\Hoard\Model\CharacterInterface");
+        return $this->getMock("Star\Component\Hoard\Model\Character");
     }
 }
