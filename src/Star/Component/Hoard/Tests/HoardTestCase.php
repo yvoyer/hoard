@@ -53,7 +53,7 @@ class HoardTestCase extends \PHPUnit_Framework_TestCase
      */
     protected function getMockEquipmentType()
     {
-        return $this->getMock("Star\Component\Hoard\Equipment\Type\Type");
+        return $this->getMock("Star\Component\Hoard\Equipment\Type");
     }
 
     /**

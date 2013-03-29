@@ -4,10 +4,10 @@
  * @package Hoard Component
  */
 
-namespace Star\Component\Hoard\Equipment\Type;
+namespace Star\Component\Hoard\Equipment;
 
 use Star\Component\Hoard\Tests\HoardTestCase;
-use Star\Component\Hoard\Equipment\Type\Type;
+use Star\Component\Hoard\Equipment\Type;
 
 class TypeTest extends HoardTestCase
 {

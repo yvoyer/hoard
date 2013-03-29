@@ -8,7 +8,7 @@ namespace Star\Component\Hoard\Equipment;
 
 use Star\Component\Hoard\Equipment\Ability\AbilityInterface;
 use Star\Component\Hoard\Equipment\Exception\AttributeNotNullableException;
-use Star\Component\Hoard\Equipment\Type\Type;
+use Star\Component\Hoard\Equipment\Type;
 
 /**
  * An equipment object

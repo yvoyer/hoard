@@ -4,7 +4,7 @@
  * @package Hoard Component
  */
 
-namespace Star\Component\Hoard\Equipment\Type;
+namespace Star\Component\Hoard\Equipment;
 
 use Star\Component\Hoard\Equipment\Exception\AttributeNotNullableException;
 
