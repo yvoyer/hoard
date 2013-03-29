@@ -81,6 +81,21 @@ class EquipmentTest extends HoardTestCase
         $this->assertSame("Short Sword", $equipment->getName());
     }
 
+    public function testManageTypes()
+    {
+        $type         = $this->getMockEquipmentType();
+        $notFoundType = $this->getMockEquipmentType();
+
+        $equipment = $this->getEquipment();
+        $this->assertCount(0, $equipment->getTypes());
+        $this->assertSame($equipment, $equipment->addType($type));
+        $this->assertCount(1, $equipment->getTypes());
+        $this->assertSame($equipment, $equipment->removeType($notFoundType));
+        $this->assertCount(1, $equipment->getTypes());
+        $this->assertSame($equipment, $equipment->removeType($type));
+        $this->assertCount(0, $equipment->getTypes());
+    }
+
     public function testAddSpecialAbilityAddsValue()
     {
         $equipment = $this->getEquipment(null, self::BASE_COST);

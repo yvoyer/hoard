@@ -115,6 +115,33 @@ class Equipment
     }
 
     /**
+     * Remove the $type
+     *
+     * @param Type $type
+     *
+     * @return Equipment
+     */
+    public function removeType(Type $type)
+    {
+        $index = array_search($type, $this->types, true);
+        if (false !== $index) {
+            unset($this->types[$index]);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Returns the $types
+     *
+     * @return string
+     */
+    public function getTypes()
+    {
+        return $this->types;
+    }
+
+    /**
      * Add an ability
      *
      * @param AbilityInterface $ability
