@@ -18,7 +18,7 @@
     <tbody>
     {% for item in items %}
     <tr>
-        <td>{{ item.name }}</td>
+        <td><a href="{{ path("hoard.item_edit", {"id": item.id}) }}">{{ item.name }}</a></td>
         <td>{{ item.cost }}</td>
         {% set isMagic = "No" %}
         <td>{{ item.isMagic() ? "Yes" : "No" }}</td>

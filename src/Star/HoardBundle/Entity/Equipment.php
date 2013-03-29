@@ -116,6 +116,18 @@ class Equipment extends BaseEquipment
     }
 
     /**
+     * Set the types
+     *
+     * @param string $types
+     */
+    public function setTypes($types)
+    {
+        $this->types = $types;
+
+        return $this;
+    }
+
+    /**
      * Set the baseCost
      *
      * @param numeric $baseCost
