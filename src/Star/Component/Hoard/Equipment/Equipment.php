@@ -6,6 +6,7 @@
 
 namespace Star\Component\Hoard\Equipment;
 
+use Star\Component\Hoard\Equipment\Exception\AttributeNotNullableException;
 use Star\Component\Hoard\Equipment\Type\Type;
 
 /**
@@ -50,6 +51,10 @@ class Equipment
      */
     public function getName()
     {
+        if (empty($this->name)) {
+            throw new AttributeNotNullableException("name");
+        }
+
         return $this->name;
     }
 

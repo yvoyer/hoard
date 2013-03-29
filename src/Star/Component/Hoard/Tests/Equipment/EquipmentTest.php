@@ -20,16 +20,14 @@ class EquipmentTest extends HoardTestCase
     /**
      * @return \Star\HoardBundle\Entity\Equipment
      */
-    private function getEquipment()
+    private function getEquipment($name = null, $baseCost = null)
     {
-        $equipment = new Equipment("Short Sword", self::BASE_COST);
-
-        return $equipment;
+        return new Equipment($name, $baseCost);
     }
 
     public function testGetBaseCost()
     {
-        $equipment = $this->getEquipment();
+        $equipment = $this->getEquipment(null, self::BASE_COST);
         $this->assertSame(self::BASE_COST, $equipment->getBaseCost());
     }
 
@@ -42,7 +40,7 @@ class EquipmentTest extends HoardTestCase
             ->method("getCost")
             ->will($this->returnValue($typeCost));
 
-        $equipment = $this->getEquipment();
+        $equipment = $this->getEquipment(null, self::BASE_COST);
         $equipment->addType($type);
 
         $cost = self::BASE_COST + $typeCost;
@@ -69,10 +67,19 @@ class EquipmentTest extends HoardTestCase
         $this->assertTrue($equipment->isMagic());
     }
 
-    public function testGetName()
+    /**
+     * @expectedException        Star\Component\Hoard\Equipment\Exception\AttributeNotNullableException
+     * @expectedExceptionMessage The attribute 'name' can't be null.
+     */
+    public function testNameCantBeNull()
     {
         $equipment = $this->getEquipment();
+        $equipment->getName();
+    }
 
+    public function testGetName()
+    {
+        $equipment = $this->getEquipment("Short Sword");
         $this->assertSame("Short Sword", $equipment->getName());
     }
 }
