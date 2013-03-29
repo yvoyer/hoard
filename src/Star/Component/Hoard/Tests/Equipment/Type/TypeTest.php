@@ -108,4 +108,18 @@ class TypeTest extends HoardTestCase
         $type = $this->getType(null, $identifiers);
         $this->assertTrue($type->isMasterwork(), "The equipment should be masterwork when magic");
     }
+
+    public function testIdentifiersShouldBeUnique()
+    {
+        $identifiers = array(
+            Type::IDENTIFIER_WEAPON,
+            Type::IDENTIFIER_WEAPON,
+        );
+        $expects = array(
+            Type::IDENTIFIER_WEAPON,
+        );
+
+        $type = $this->getType(null, $identifiers);
+        $this->assertSame($expects, $type->getIdentifiers(), "The identifiers should be unique");
+    }
 }

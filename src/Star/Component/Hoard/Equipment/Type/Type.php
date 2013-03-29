@@ -83,6 +83,13 @@ class Type
      */
     private function addIdentifier($identifier)
     {
+        switch ($identifier) {
+            case self::IDENTIFIER_MAGIC:
+                // Magic items are masterwork
+                $this->addIdentifier(self::IDENTIFIER_MASTERWORK);
+                break;
+        }
+
         $this->identifiers[$identifier] = $identifier;
     }
 
@@ -129,6 +136,6 @@ class Type
      */
     public function isMasterwork()
     {
-        return $this->hasIdentifier(self::IDENTIFIER_MASTERWORK) || $this->isMagic();
+        return $this->hasIdentifier(self::IDENTIFIER_MASTERWORK);
     }
 }
