@@ -8,5 +8,5 @@ namespace Star\Component\Hoard\Equipment\Ability;
 
 interface AbilityInterface
 {
-    public function getValue();
+    public function getCost();
 }

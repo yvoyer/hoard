@@ -6,6 +6,8 @@
 
 namespace Star\Component\Hoard\Equipment;
 
+use Star\Component\Hoard\Equipment\Ability\AbilityInterface;
+
 use Star\Component\Hoard\Equipment\Exception\AttributeNotNullableException;
 use Star\Component\Hoard\Equipment\Type\Type;
 
@@ -37,11 +39,19 @@ class Equipment
      */
     protected $types;
 
+    /**
+     * The abilities associated to the item
+     *
+     * @var array
+     */
+    protected $abilities;
+
     public function __construct($name = null, $baseCost = 0)
     {
-        $this->name     = $name;
-        $this->baseCost = $baseCost;
-        $this->types    = array();
+        $this->name      = $name;
+        $this->baseCost  = $baseCost;
+        $this->types     = array();
+        $this->abilities = array();
     }
 
     /**
@@ -68,6 +78,10 @@ class Equipment
         $cost = $this->baseCost;
         foreach ($this->types as $type) {
             $cost += $type->getCost();
+        }
+
+        foreach ($this->abilities as $ability) {
+            $cost += $ability->getCost();
         }
 
         return $cost;
@@ -101,6 +115,22 @@ class Equipment
     public function addType(Type $type)
     {
         $this->types[] = $type;
+
+        return $this;
+    }
+
+    /**
+     * Add the $ability
+     *
+     * @param AbilityInterface $ability
+     *
+     * @return Equipment
+     */
+    public function addAbility(AbilityInterface $ability)
+    {
+        if (false === array_search($ability, $this->abilities)) {
+            $this->abilities[] = $ability;
+        }
 
         return $this;
     }

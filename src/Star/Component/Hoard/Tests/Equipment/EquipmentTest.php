@@ -82,4 +82,29 @@ class EquipmentTest extends HoardTestCase
         $equipment = $this->getEquipment("Short Sword");
         $this->assertSame("Short Sword", $equipment->getName());
     }
+
+    public function testAddSpecialAbilityAddsValue()
+    {
+        $equipment = $this->getEquipment(null, self::BASE_COST);
+
+        $abilityOneCost = 300;
+        $abilityOne = $this->getMockAbility();
+        $abilityOne->expects($this->once())
+            ->method("getCost")
+            ->will($this->returnValue($abilityOneCost));
+        $this->assertSame($equipment, $equipment->addAbility($abilityOne));
+
+        $abilityTwoCost = 2000;
+        $abilityTwo = $this->getMockAbility();
+        $abilityTwo->expects($this->once())
+            ->method("getCost")
+            ->will($this->returnValue($abilityTwoCost));
+        $equipment->addAbility($abilityTwo);
+
+        $this->assertSame(
+            self::BASE_COST + $abilityOneCost + $abilityTwoCost,
+            $equipment->getCost(),
+            "The equipment cost should be changed based on abilities"
+        );
+    }
 }
