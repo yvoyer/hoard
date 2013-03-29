@@ -7,10 +7,8 @@
 namespace Star\Component\Hoard\Tests\Equipment;
 
 use Star\Component\Hoard\Equipment\Type\MagicType;
-
 use Star\Component\Hoard\Equipment\Type\MasterworkType;
-
-use \Star\Component\Hoard\Equipment\Equipment;
+use Star\Component\Hoard\Equipment\Equipment;
 use Star\Component\Hoard\Tests\HoardTestCase;
 
 class EquipmentTest extends HoardTestCase
@@ -31,20 +29,19 @@ class EquipmentTest extends HoardTestCase
         $this->assertSame(self::BASE_COST, $equipment->getBaseCost());
     }
 
-    public function testAddTypeValueToCost()
+    public function testManageAbility()
     {
-        $typeCost = 300;
+        $equipment       = $this->getEquipment();
+        $ability         = $this->getMockAbility();
+        $notFoundAbility = $this->getMockAbility();
 
-        $type = $this->getMockEquipmentType();
-        $type->expects($this->once())
-            ->method("getCost")
-            ->will($this->returnValue($typeCost));
-
-        $equipment = $this->getEquipment(null, self::BASE_COST);
-        $equipment->addType($type);
-
-        $cost = self::BASE_COST + $typeCost;
-        $this->assertSame($cost, $equipment->getCost());
+        $this->assertCount(0, $equipment->getAbilities());
+        $this->assertSame($equipment, $equipment->addAbility($ability));
+        $this->assertCount(1, $equipment->getAbilities());
+        $this->assertSame($equipment, $equipment->removeAbility($notFoundAbility));
+        $this->assertCount(1, $equipment->getAbilities());
+        $this->assertSame($equipment, $equipment->removeAbility($ability));
+        $this->assertCount(0, $equipment->getAbilities());
     }
 
     public function testIsMagic()
@@ -64,6 +61,7 @@ class EquipmentTest extends HoardTestCase
             ->method("isMagic")
             ->will($this->returnValue(true));
         $equipment->addType($type);
+
         $this->assertTrue($equipment->isMagic());
     }
 
