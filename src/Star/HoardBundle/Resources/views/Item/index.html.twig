@@ -12,6 +12,7 @@
         <tr>
             <th>Name</th>
             <th>Price</th>
+            <th>Magical</th>
         </tr>
     </thead>
     <tbody>
@@ -19,6 +20,8 @@
     <tr>
         <td>{{ item.name }}</td>
         <td>{{ item.cost }}</td>
+        {% set isMagic = "No" %}
+        <td>{{ item.isMagic() ? "Yes" : "No" }}</td>
     </tr>
     {% endfor %}
     </tbody>

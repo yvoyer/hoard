@@ -50,6 +50,13 @@ class Equipment extends BaseEquipment
      *
      * @ORM\Column(name="abilities", type="array")
      */
+    protected $abilities;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="types", type="array")
+     */
     protected $types;
 
     /**
@@ -96,6 +103,16 @@ class Equipment extends BaseEquipment
         $this->name = $name;
 
         return $this;
+    }
+
+    /**
+     * Returns the equipment's name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 
     /**
