@@ -17,6 +17,10 @@ use Star\Component\Hoard\Equipment\Type;
  */
 class Equipment
 {
+    const IDENTIFIER_WEAPON = "WEAPON";
+    const IDENTIFIER_MAGIC = "MAGIC";
+    const IDENTIFIER_MASTERWORK = "MASTERWORK";
+
     /**
      * The base cost of the equipment
      *
@@ -47,10 +51,22 @@ class Equipment
 
     public function __construct($name = null, $baseCost = 0)
     {
-        $this->name      = $name;
-        $this->baseCost  = $baseCost;
-        $this->types     = array();
+        $this->setName($name);
+        $this->setBaseCost($baseCost);
+        $this->setTypes(array());
         $this->abilities = array();
+    }
+
+    /**
+     * Set the name
+     *
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
     }
 
     /**
@@ -83,21 +99,35 @@ class Equipment
     }
 
     /**
-     * Returns wheter the item is magic
+     * Retruns whether the equipment is magical
      *
-     * @return boolean
+     * @return bool
      */
     public function isMagic()
     {
-        $isMagic = false;
-        foreach ($this->types as $type) {
-            if ($type->isMagic()) {
-                $isMagic = true;
-                break;
-            }
-        }
+        return $this->hasType(self::IDENTIFIER_MAGIC);
+    }
 
-        return $isMagic;
+    /**
+     * Retruns whether the equipment is masterwork
+     *
+     * @return bool
+     */
+    public function isMasterwork()
+    {
+        return $this->hasType(self::IDENTIFIER_MASTERWORK);
+    }
+
+    /**
+     * Set the types
+     *
+     * @param string $types
+     */
+    public function setTypes($types)
+    {
+        $this->types = $types;
+
+        return $this;
     }
 
     /**
@@ -105,30 +135,49 @@ class Equipment
      *
      * @param string $type
      *
-     * @return Equipment
+     * @return bool
      */
-    public function addType(Type $type)
+    public function addType($type)
     {
-        $this->types[] = $type;
+        if (self::IDENTIFIER_MAGIC === $type) {
+            $this->addType(self::IDENTIFIER_MASTERWORK);
+        }
 
-        return $this;
+        $success = $this->hasType($type);
+        if (false === $success) {
+            $this->types[$type] = $type;
+        }
+
+        return !$success;
+    }
+
+    /**
+     * Returns whether the $type is present in the collection
+     *
+     * @param string $type
+     *
+     * @return bool
+     */
+    private function hasType($type)
+    {
+        return array_key_exists($type, $this->types);
     }
 
     /**
      * Remove the $type
      *
-     * @param Type $type
+     * @param string $type
      *
-     * @return Equipment
+     * @return bool
      */
-    public function removeType(Type $type)
+    public function removeType($type)
     {
-        $index = array_search($type, $this->types, true);
-        if (false !== $index) {
-            unset($this->types[$index]);
+        $success = $this->hasType($type);
+        if ($success) {
+            unset($this->types[$type]);
         }
 
-        return $this;
+        return $success;
     }
 
     /**
@@ -139,6 +188,17 @@ class Equipment
     public function getTypes()
     {
         return $this->types;
+    }
+
+    /**
+     * Returns the exported version for printing in a file
+     *
+     * @return string
+     */
+    public function export()
+    {
+        // @todo Move to a decorator
+        return $this->getName() . ";Types:" . implode(",", $this->types);
     }
 
     /**
@@ -183,6 +243,18 @@ class Equipment
     }
 
     /**
+     * Set the baseCost
+     *
+     * @param numeric $baseCost
+     */
+    public function setBaseCost($baseCost)
+    {
+        $this->baseCost = $baseCost;
+
+        return $this;
+    }
+
+    /**
      * Returns the base value
      *
      * @return number
@@ -190,5 +262,15 @@ class Equipment
     public function getBaseCost()
     {
         return $this->baseCost;
+    }
+
+    /**
+     * Returns the string representation of the type
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getName();
     }
 }
