@@ -11,9 +11,9 @@ use Star\Component\Hoard\Equipment\Type;
 
 class TypeTest extends HoardTestCase
 {
-    public function getType($name = null)
+    public function getType(array $args = array())
     {
-        return new Type($name);
+        return new Type($args);
     }
 
     /**
@@ -27,10 +27,12 @@ class TypeTest extends HoardTestCase
 
     public function testGetNameReturnsTheSetValue()
     {
-        $name = uniqid();
+        $options = array(
+            "name" => uniqid()
+        );
 
-        $type = $this->getType($name);
-        $this->assertSame($name, $type->getName());
-        $this->assertSame($name, $type->__toString());
+        $type = $this->getType($options);
+        $this->assertSame($options["name"], $type->getName());
+        $this->assertSame($options["name"], $type->__toString());
     }
 }

@@ -22,9 +22,9 @@ class Type
      */
     private $name;
 
-    public function __construct($name = null)
+    public function __construct(array $args = array())
     {
-        $this->name = $name;
+        $this->name = (isset($args["name"])) ? strval($args["name"]) : null;
     }
 
     /**

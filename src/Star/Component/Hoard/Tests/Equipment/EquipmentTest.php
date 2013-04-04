@@ -6,6 +6,7 @@
 
 namespace Star\Component\Hoard\Tests\Equipment;
 
+use Star\Component\Hoard\Equipment\Ability\AbilityInterface;
 use Star\Component\Hoard\Equipment\Type\MagicType;
 use Star\Component\Hoard\Equipment\Type\MasterworkType;
 use Star\Component\Hoard\Equipment\Equipment;
@@ -18,15 +19,19 @@ class EquipmentTest extends HoardTestCase
     /**
      * @return \Star\HoardBundle\Entity\Equipment
      */
-    private function getEquipment($name = null, $baseCost = null)
+    private function getEquipment(array $args = array())
     {
-        return new Equipment($name, $baseCost);
+        return new Equipment($args);
     }
 
     public function testGetBaseCost()
     {
-        $equipment = $this->getEquipment(null, self::BASE_COST);
-        $this->assertSame(self::BASE_COST, $equipment->getBaseCost());
+        $options = array(
+            "baseCost" => 15,
+        );
+
+        $equipment = $this->getEquipment($options);
+        $this->assertSame(15, $equipment->getBaseCost());
     }
 
     public function testManageAbility()
@@ -35,13 +40,13 @@ class EquipmentTest extends HoardTestCase
         $ability         = $this->getMockAbility();
         $notFoundAbility = $this->getMockAbility();
 
-        $this->assertCount(0, $equipment->getAbilities());
-        $this->assertSame($equipment, $equipment->addAbility($ability));
+        $this->assertEmpty($equipment->getAbilities());
+        $this->assertTrue($equipment->addAbility($ability));
         $this->assertCount(1, $equipment->getAbilities());
-        $this->assertSame($equipment, $equipment->removeAbility($notFoundAbility));
+        $this->assertFalse($equipment->removeAbility($notFoundAbility));
         $this->assertCount(1, $equipment->getAbilities());
-        $this->assertSame($equipment, $equipment->removeAbility($ability));
-        $this->assertCount(0, $equipment->getAbilities());
+        $this->assertTrue($equipment->removeAbility($ability));
+        $this->assertEmpty($equipment->getAbilities());
     }
 
     public function testIsMagic()
@@ -75,16 +80,18 @@ class EquipmentTest extends HoardTestCase
 
     public function testGetName()
     {
-        $equipment = $this->getEquipment("Short Sword");
-        $this->assertSame("Short Sword", $equipment->getName());
+        $options = array(
+            "name" => "Short Sword",
+        );
+        $equipment = $this->getEquipment($options);
+        $this->assertSame($options["name"], $equipment->getName());
     }
 
     public function testSetGetType()
     {
         $equipment = $this->getEquipment();
         $types     = array(Equipment::IDENTIFIER_WEAPON);
-
-        $this->assertSame($equipment, $equipment->setTypes($types));
+        $equipment->addType(Equipment::IDENTIFIER_WEAPON);
         $this->assertSame($types, $equipment->getTypes());
     }
 
@@ -107,14 +114,17 @@ class EquipmentTest extends HoardTestCase
 
     public function testAddSpecialAbilityAddsValue()
     {
-        $equipment = $this->getEquipment(null, self::BASE_COST);
+        $options = array(
+            "baseCost" => 15,
+        );
+        $equipment = $this->getEquipment($options);
 
         $abilityOneCost = 300;
         $abilityOne = $this->getMockAbility();
         $abilityOne->expects($this->once())
             ->method("getCost")
             ->will($this->returnValue($abilityOneCost));
-        $this->assertSame($equipment, $equipment->addAbility($abilityOne));
+        $equipment->addAbility($abilityOne);
 
         $abilityTwoCost = 2000;
         $abilityTwo = $this->getMockAbility();
@@ -124,7 +134,7 @@ class EquipmentTest extends HoardTestCase
         $equipment->addAbility($abilityTwo);
 
         $this->assertSame(
-            self::BASE_COST + $abilityOneCost + $abilityTwoCost,
+            2315,
             $equipment->getCost(),
             "The equipment cost should be changed based on abilities"
         );
@@ -132,47 +142,27 @@ class EquipmentTest extends HoardTestCase
 
     public function testToStringReturnsTheName()
     {
-        $name = uniqid();
-        $equipment = $this->getEquipment($name);
+        $options = array(
+            "name" => uniqid(),
+        );
+        $equipment = $this->getEquipment($options);
 
-        $this->assertSame($name, $equipment->__toString());
+        $this->assertSame($options["name"], $equipment->__toString());
     }
 
     public function testExportReturnsTheTypeForPrintingInAFile()
     {
-        $name = uniqid();
-        $equipment = $this->getEquipment($name);
+        $options = array(
+            "name" => uniqid(),
+        );
+
+        $equipment = $this->getEquipment($options);
         $equipment->addType(Equipment::IDENTIFIER_WEAPON);
         $equipment->addType(Equipment::IDENTIFIER_MASTERWORK);
 
-        $expects = $name . ";Types:" . Equipment::IDENTIFIER_WEAPON . "," . Equipment::IDENTIFIER_MASTERWORK;
+        $expects = $options["name"] . ";Types:" . Equipment::IDENTIFIER_WEAPON . "," . Equipment::IDENTIFIER_MASTERWORK;
         $this->assertSame($expects, $equipment->export());
     }
-
-//     public function testIsMasterwork()
-//     {
-//         $types = array(
-//             Equipment::IDENTIFIER_WEAPON,
-//         );
-//         $equipment = $this->getEquipment();
-//         $equipment->setTypes($types);
-//         $this->assertFalse($equipment->isMasterwork(), "The default value should be non masterwork");
-
-//         $types = array(
-//             Equipment::IDENTIFIER_MASTERWORK,
-//         );
-//         $equipment = $this->getEquipment();
-//         $equipment->setTypes($types);
-//         $this->assertTrue($equipment->isMasterwork(), "The equipment should be masterwork");
-
-//         $types = array(
-//             Equipment::IDENTIFIER_MAGIC,
-//         );
-
-//         $equipment = $this->getEquipment();
-//         $equipment->setTypes($types);
-//         $this->assertTrue($equipment->isMasterwork(), "The equipment should be masterwork when magic");
-//     }
 
     public function testTypeShouldBeUnique()
     {

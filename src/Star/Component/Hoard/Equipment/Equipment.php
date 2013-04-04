@@ -49,24 +49,12 @@ class Equipment
      */
     protected $abilities;
 
-    public function __construct($name = null, $baseCost = 0)
+    public function __construct(array $args = array())
     {
-        $this->setName($name);
-        $this->setBaseCost($baseCost);
-        $this->setTypes(array());
-        $this->abilities = array();
-    }
-
-    /**
-     * Set the name
-     *
-     * @param string $name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
+        $this->name      = (isset($args["name"]))      ? $args["name"]      : null;
+        $this->baseCost  = (isset($args["baseCost"]))  ? $args["baseCost"]  : null;
+        $this->abilities = (isset($args["abilities"])) ? $args["abilities"] : array();
+        $this->types     = (isset($args["types"]))     ? $args["types"]     : array();
     }
 
     /**
@@ -116,18 +104,6 @@ class Equipment
     public function isMasterwork()
     {
         return $this->hasType(self::IDENTIFIER_MASTERWORK);
-    }
-
-    /**
-     * Set the types
-     *
-     * @param string $types
-     */
-    public function setTypes($types)
-    {
-        $this->types = $types;
-
-        return $this;
     }
 
     /**
@@ -187,7 +163,7 @@ class Equipment
      */
     public function getTypes()
     {
-        return $this->types;
+        return array_values($this->types);
     }
 
     /**
@@ -206,13 +182,18 @@ class Equipment
      *
      * @param AbilityInterface $ability
      *
-     * @return Equipment
+     * @return bool
      */
     public function addAbility(AbilityInterface $ability)
     {
-        $this->abilities[] = $ability;
+        $index   = array_search($ability, $this->abilities);
+        $success = false;
+        if (false === $index) {
+            $this->abilities[] = $ability;
+            $success = true;
+        }
 
-        return $this;
+        return $success;
     }
 
     /**
@@ -230,28 +211,18 @@ class Equipment
      *
      * @param AbilityInterface $ability
      *
-     * @return Equipment
+     * @return bool
      */
     public function removeAbility(AbilityInterface $ability)
     {
-        $index = array_search($ability, $this->abilities, true);
+        $index   = array_search($ability, $this->abilities, true);
+        $success = false;
         if (false !== $index) {
             unset($this->abilities[$index]);
+            $success = true;
         }
 
-        return $this;
-    }
-
-    /**
-     * Set the baseCost
-     *
-     * @param numeric $baseCost
-     */
-    public function setBaseCost($baseCost)
-    {
-        $this->baseCost = $baseCost;
-
-        return $this;
+        return $success;
     }
 
     /**
