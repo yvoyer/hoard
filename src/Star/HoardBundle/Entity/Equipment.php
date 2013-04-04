@@ -50,6 +50,13 @@ class Equipment extends BaseEquipment
      *
      * @ORM\Column(name="abilities", type="array")
      */
+    protected $abilities;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="types", type="array")
+     */
     protected $types;
 
     /**
@@ -84,29 +91,5 @@ class Equipment extends BaseEquipment
     public function getSlug()
     {
         return $this->slug;
-    }
-
-    /**
-     * Set the name
-     *
-     * @param string $name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Set the baseCost
-     *
-     * @param numeric $baseCost
-     */
-    public function setBaseCost($baseCost)
-    {
-        $this->baseCost = $baseCost;
-
-        return $this;
     }
 }
