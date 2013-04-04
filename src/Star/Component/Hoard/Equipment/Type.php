@@ -7,25 +7,21 @@
 namespace Star\Component\Hoard\Equipment;
 
 use Star\Component\Hoard\Equipment\Exception\AttributeNotNullableException;
+use Star\Component\Hoard\Object;
 
 /**
  * @author Yannick Voyer
  *
  * Class defining the types of equipments
  */
-class Type
+class Type extends Object
 {
     /**
      * The name of the type
      *
      * @var string
      */
-    private $name;
-
-    public function __construct(array $args = array())
-    {
-        $this->name = (isset($args["name"])) ? strval($args["name"]) : null;
-    }
+    protected $name;
 
     /**
      * Returns the string representation of the type

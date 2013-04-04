@@ -9,13 +9,14 @@ namespace Star\Component\Hoard\Equipment;
 use Star\Component\Hoard\Equipment\Ability\AbilityInterface;
 use Star\Component\Hoard\Equipment\Exception\AttributeNotNullableException;
 use Star\Component\Hoard\Equipment\Type;
+use Star\Component\Hoard\Object;
 
 /**
  * An equipment object
  *
  * @author Yannick Voyer
  */
-class Equipment
+class Equipment extends Object
 {
     const IDENTIFIER_WEAPON = "WEAPON";
     const IDENTIFIER_MAGIC = "MAGIC";
@@ -26,7 +27,7 @@ class Equipment
      *
      * @var float
      */
-    protected $baseCost;
+    protected $baseCost = 0;
 
     /**
      * The name of the item
@@ -40,22 +41,14 @@ class Equipment
      *
      * @var array
      */
-    protected $types;
+    protected $types = array();
 
     /**
      * The abilities associated to the item
      *
      * @var array
      */
-    protected $abilities;
-
-    public function __construct(array $args = array())
-    {
-        $this->name      = (isset($args["name"]))      ? $args["name"]      : null;
-        $this->baseCost  = (isset($args["baseCost"]))  ? $args["baseCost"]  : null;
-        $this->abilities = (isset($args["abilities"])) ? $args["abilities"] : array();
-        $this->types     = (isset($args["types"]))     ? $args["types"]     : array();
-    }
+    protected $abilities = array();
 
     /**
      * Returns the equipment's name
