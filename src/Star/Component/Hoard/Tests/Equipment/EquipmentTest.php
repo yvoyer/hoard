@@ -24,14 +24,14 @@ class EquipmentTest extends HoardTestCase
         return new Equipment($args);
     }
 
-    public function testGetBaseCost()
+    public function testSetGetBaseCost()
     {
-        $options = array(
-            "baseCost" => 15,
-        );
+        $this->assertSetterGetter("baseCost", $this->getEquipment(), uniqid());
+    }
 
-        $equipment = $this->getEquipment($options);
-        $this->assertSame(15, $equipment->getBaseCost());
+    public function testBaseCostIsOptionalizable()
+    {
+        $this->assertAttributeOptionalizable("baseCost", uniqid(), $this->getEquipment());
     }
 
     public function testManageAbility()
@@ -54,7 +54,7 @@ class EquipmentTest extends HoardTestCase
         $equipment = $this->getEquipment();
         $this->assertFalse($equipment->isMagic(), "The equipment should be not magical by default");
 
-        $equipment->addType(Equipment::IDENTIFIER_MAGIC);
+        $equipment->addType(Equipment::TYPE_MAGIC);
         $this->assertTrue($equipment->isMagic(), "The equipment should be magical");
         $this->assertTrue($equipment->isMasterwork(), "The equipment should be masterwork");
     }
@@ -64,7 +64,7 @@ class EquipmentTest extends HoardTestCase
         $equipment = $this->getEquipment();
         $this->assertFalse($equipment->isMasterwork(), "The equipment should be not be masterwork by default");
 
-        $equipment->addType(Equipment::IDENTIFIER_MASTERWORK);
+        $equipment->addType(Equipment::TYPE_MASTERWORK);
         $this->assertTrue($equipment->isMasterwork(), "The equipment should be be masterwork");
     }
 
@@ -78,26 +78,40 @@ class EquipmentTest extends HoardTestCase
         $equipment->getName();
     }
 
-    public function testGetName()
+    public function testSetGetName()
+    {
+        $this->assertSetterGetter("name", $this->getEquipment(), uniqid());
+    }
+
+    public function testNameOptionalizable()
+    {
+        $this->assertAttributeOptionalizable("name", uniqid(), $this->getEquipment());
+    }
+
+    /**
+     * @depends testNameOptionalizable
+     */
+    public function testToStringReturnsTheName()
     {
         $options = array(
-            "name" => "Short Sword",
+            "name" => uniqid(),
         );
         $equipment = $this->getEquipment($options);
-        $this->assertSame($options["name"], $equipment->getName());
+
+        $this->assertSame($options["name"], $equipment->__toString());
     }
 
     public function testSetGetType()
     {
         $equipment = $this->getEquipment();
-        $types     = array(Equipment::IDENTIFIER_WEAPON);
-        $equipment->addType(Equipment::IDENTIFIER_WEAPON);
+        $types     = array(Equipment::TYPE_WEAPON);
+        $equipment->addType(Equipment::TYPE_WEAPON);
         $this->assertSame($types, $equipment->getTypes());
     }
 
     public function testManageTypes()
     {
-        $type      = Equipment::IDENTIFIER_WEAPON;
+        $type      = Equipment::TYPE_WEAPON;
         $equipment = $this->getEquipment();
 
         $this->assertEmpty($equipment->getTypes());
@@ -112,6 +126,9 @@ class EquipmentTest extends HoardTestCase
         $this->assertEmpty($equipment->getTypes());
     }
 
+    /**
+     * @depends testBaseCostIsOptionalizable
+     */
     public function testAddSpecialAbilityAddsValue()
     {
         $options = array(
@@ -140,16 +157,9 @@ class EquipmentTest extends HoardTestCase
         );
     }
 
-    public function testToStringReturnsTheName()
-    {
-        $options = array(
-            "name" => uniqid(),
-        );
-        $equipment = $this->getEquipment($options);
-
-        $this->assertSame($options["name"], $equipment->__toString());
-    }
-
+    /**
+     * @depends testNameOptionalizable
+     */
     public function testExportReturnsTheTypeForPrintingInAFile()
     {
         $options = array(
@@ -157,18 +167,10 @@ class EquipmentTest extends HoardTestCase
         );
 
         $equipment = $this->getEquipment($options);
-        $equipment->addType(Equipment::IDENTIFIER_WEAPON);
-        $equipment->addType(Equipment::IDENTIFIER_MASTERWORK);
+        $equipment->addType(Equipment::TYPE_WEAPON);
+        $equipment->addType(Equipment::TYPE_MASTERWORK);
 
-        $expects = $options["name"] . ";Types:" . Equipment::IDENTIFIER_WEAPON . "," . Equipment::IDENTIFIER_MASTERWORK;
+        $expects = $options["name"] . ";Types:" . Equipment::TYPE_WEAPON . "," . Equipment::TYPE_MASTERWORK;
         $this->assertSame($expects, $equipment->export());
-    }
-
-    public function testTypeShouldBeUnique()
-    {
-        $equipment = $this->getEquipment();
-        $equipment->addType(Equipment::IDENTIFIER_WEAPON);
-        $equipment->addType(Equipment::IDENTIFIER_WEAPON);
-        $this->assertCount(1, $equipment->getTypes(), "The type should be unique");
     }
 }

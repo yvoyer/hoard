@@ -9,18 +9,17 @@ namespace Star\Component\Hoard\Equipment;
 use Star\Component\Hoard\Equipment\Ability\AbilityInterface;
 use Star\Component\Hoard\Equipment\Exception\AttributeNotNullableException;
 use Star\Component\Hoard\Equipment\Type;
-use Star\Component\Hoard\Object;
 
 /**
  * An equipment object
  *
  * @author Yannick Voyer
  */
-class Equipment extends Object
+class Equipment
 {
-    const IDENTIFIER_WEAPON = "WEAPON";
-    const IDENTIFIER_MAGIC = "MAGIC";
-    const IDENTIFIER_MASTERWORK = "MASTERWORK";
+    const TYPE_WEAPON = "WEAPON";
+    const TYPE_MAGIC = "MAGIC";
+    const TYPE_MASTERWORK = "MASTERWORK";
 
     /**
      * The base cost of the equipment
@@ -50,6 +49,37 @@ class Equipment extends Object
      */
     protected $abilities = array();
 
+    // @todo $args could Optionizable
+    public function __construct(array $args = array())
+    {
+        $this->setBaseCost($args);
+        $this->setName($args);
+
+        // Collections should not have setters
+        $this->types     = array();
+        $this->abilities = array();
+    }
+
+    /**
+     * Set the name
+     *
+     * @param array|string $value The value
+     *
+     * @return \Star\Component\Hoard\Equipment\Equipment
+     */
+    public function setName($value)
+    {
+        if (is_array($value)) {
+            if (isset($value["name"])) {
+                $value = $value["name"];
+            }
+        }
+
+        $this->name = $value;
+
+        return $this;
+    }
+
     /**
      * Returns the equipment's name
      *
@@ -62,6 +92,25 @@ class Equipment extends Object
         }
 
         return $this->name;
+    }
+
+    /**
+     * Set the base cost for the equipment
+     *
+     * @param array|string $value The value
+     *
+     * @return \Star\Component\Hoard\Equipment\Equipment
+     */
+    public function setBaseCost($value)
+    {
+        if (is_array($value)) {
+            if (isset($value["baseCost"])) {
+                $value = $value["baseCost"];
+            }
+        }
+        $this->baseCost = $value;
+
+        return $this;
     }
 
     /**
@@ -80,13 +129,23 @@ class Equipment extends Object
     }
 
     /**
+     * Returns the base value
+     *
+     * @return number
+     */
+    public function getBaseCost()
+    {
+        return $this->baseCost;
+    }
+
+    /**
      * Retruns whether the equipment is magical
      *
      * @return bool
      */
     public function isMagic()
     {
-        return $this->hasType(self::IDENTIFIER_MAGIC);
+        return $this->hasType(self::TYPE_MAGIC);
     }
 
     /**
@@ -96,7 +155,7 @@ class Equipment extends Object
      */
     public function isMasterwork()
     {
-        return $this->hasType(self::IDENTIFIER_MASTERWORK);
+        return $this->hasType(self::TYPE_MASTERWORK);
     }
 
     /**
@@ -108,8 +167,8 @@ class Equipment extends Object
      */
     public function addType($type)
     {
-        if (self::IDENTIFIER_MAGIC === $type) {
-            $this->addType(self::IDENTIFIER_MASTERWORK);
+        if (self::TYPE_MAGIC === $type) {
+            $this->addType(self::TYPE_MASTERWORK);
         }
 
         $success = $this->hasType($type);
@@ -190,16 +249,6 @@ class Equipment extends Object
     }
 
     /**
-     * Returns the abilities
-     *
-     * @return array
-     */
-    public function getAbilities()
-    {
-        return $this->abilities;
-    }
-
-    /**
      * Remove the ability
      *
      * @param AbilityInterface $ability
@@ -219,13 +268,13 @@ class Equipment extends Object
     }
 
     /**
-     * Returns the base value
+     * Returns the abilities
      *
-     * @return number
+     * @return array
      */
-    public function getBaseCost()
+    public function getAbilities()
     {
-        return $this->baseCost;
+        return $this->abilities;
     }
 
     /**
