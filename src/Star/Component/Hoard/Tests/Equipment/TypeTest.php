@@ -25,14 +25,26 @@ class TypeTest extends HoardTestCase
         $this->getType()->getName();
     }
 
-    public function testGetNameReturnsTheSetValue()
+    public function testNameIsOptionalizable()
+    {
+        $this->assertAttributeOptionalizable("name", uniqid(), $this->getType());
+    }
+
+    public function testSetterGetterName()
+    {
+        $this->assertSetterGetter("name", $this->getType(), uniqid());
+    }
+
+    /**
+     * @depends testNameIsOptionalizable
+     */
+    public function testToStringReturnsName()
     {
         $options = array(
             "name" => uniqid()
         );
 
         $type = $this->getType($options);
-        $this->assertSame($options["name"], $type->getName());
         $this->assertSame($options["name"], $type->__toString());
     }
 }

@@ -23,6 +23,32 @@ class Type extends Object
      */
     protected $name;
 
+    public function __construct(array $args = array())
+    {
+        $this->setName($args);
+    }
+
+    /**
+     * Set the name of the type
+     *
+     * @param array|string $value The value
+     *
+     * @return \Star\Component\Hoard\Equipment\Type
+     */
+    public function setName($value)
+    {
+        //         $defaultValue = 0;
+        if (is_array($value)) {
+            if (isset($value["name"])) {
+                $value = $value["name"];
+            }
+        }
+
+        $this->name = $value;
+
+        return $this;
+    }
+
     /**
      * Returns the string representation of the type
      *
