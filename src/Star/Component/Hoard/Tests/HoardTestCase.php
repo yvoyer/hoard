@@ -6,7 +6,9 @@
 
 namespace Star\Component\Hoard\Tests;
 
-class HoardTestCase extends \PHPUnit_Framework_TestCase
+use Star\Component\Utils\PHPUnit\UnitTestCase;
+
+class HoardTestCase extends UnitTestCase
 {
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject
